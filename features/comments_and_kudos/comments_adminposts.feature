@@ -47,7 +47,7 @@ Feature: Commenting on admin posts
       And I press "Post"
     Then I should see "successfully updated"
     When I follow "Edit Post"
-    Then the "No one can comment" checkbox should be checked
+    Then the "No one can comment" radio button should be checked
     When I am logged out
       And I go to the admin-posts page
       And I follow "Default Admin Post"
@@ -68,7 +68,7 @@ Feature: Commenting on admin posts
       And I press "Post"
     Then I should see "successfully updated"
     When I follow "Edit Post"
-    Then the "Only registered users can comment" checkbox should be checked
+    Then the "Only registered users can comment" radio button should be checked
     When I am logged out
       And I go to the admin-posts page
       And I follow "Default Admin Post"
@@ -95,7 +95,7 @@ Feature: Commenting on admin posts
       And I press "Post"
     Then I should see "successfully updated"
     When I follow "Edit Post"
-    Then the "Registered users and guests can comment" checkbox should be checked
+    Then the "Registered users and guests can comment" radio button should be checked
     When I am logged out
       And I go to the admin-posts page
       And I follow "Default Admin Post"
