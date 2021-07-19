@@ -180,3 +180,6 @@ en:
   skins:
     confirm_delete:
       confirm_html: Are you sure you want to <strong><em>delete</em></strong> the skin "%{skin_title}"?
+  works:
+    work_form_tags:
+      description: "Tags are comma separated, %{char_limit} characters per tag. Fandom, relationship, character, and additional tags must not add up to more than %{tag_limit}. Archive warning, category, and rating tags do not count toward this limit."

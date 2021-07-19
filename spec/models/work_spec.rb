@@ -115,6 +115,25 @@ describe Work do
     end
   end
 
+  context "validate user tag limits" do
+    let(:work) { create(:work) }
+
+    it "does not save if too many tags" do
+      work.tags.reload
+      (1..(ArchiveConfig.WORK_TAGS_MAX - 1)).each do
+        # -1 since work is created with fandom tag by default
+        work.tags << create(:tag, type: "Freeform")
+      end
+      expect(work.save!).to be_truthy
+      expect(work.errors[:base]).to be_empty
+
+      work.tags.reload
+      work.tags << create(:tag, type: "Freeform")
+      expect(work.save).to be_falsey
+      expect(work.errors[:base]).to include("Too many user defined tags")
+    end
+  end
+
   describe "#crossover" do
     it "is not crossover with one fandom" do
       fandom = create(:canonical_fandom, name: "nge")

@@ -136,6 +136,17 @@ class Work < ApplicationRecord
     end
   end
 
+  validate :validate_user_tag_limits
+
+  def validate_user_tag_limits
+    required_tags = [ArchiveConfig.RATING_CATEGORY_NAME, ArchiveConfig.CATEGORY_CATEGORY_NAME, ArchiveConfig.WARNING_CATEGORY_NAME.gsub(" ", "")]
+    user_tags = self.tags.select { |tag| !tag.type.in?(required_tags) }
+    if user_tags.size > ArchiveConfig.WORK_TAGS_MAX
+      errors.add(:base, ts("Too many user defined tags")) 
+      throw :abort
+    end
+  end
+
   validates :fandom_string,
             presence: { message: "^Please fill in at least one fandom." }
   validates :archive_warning_string,
@@ -164,7 +175,7 @@ class Work < ApplicationRecord
   # consistency and that associated variables are updated.
   ########################################################################
 
-  before_save :clean_and_validate_title, :validate_published_at, :ensure_revised_at
+  before_save :clean_and_validate_title, :validate_published_at, :ensure_revised_at, :validate_user_tag_limits
 
   after_save :post_first_chapter
   before_save :set_word_count

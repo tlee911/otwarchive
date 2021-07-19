@@ -2,7 +2,9 @@
   <legend><%= ts('Tags') %></legend>
   <h3 class="landmark heading"><%= ts('Tags') %></h3>
 
-  <p class="note"><%= ts('Tags are comma separated, %{max} characters per tag.', :max => ArchiveConfig.TAG_MAX) %></p>
+  <p class="note">
+    <%= t(".description", char_limit: ArchiveConfig.TAG_MAX, tag_limit: ArchiveConfig.WORK_TAGS_MAX) %>
+  </p>
 
   <dl>
     <dt class="rating required">

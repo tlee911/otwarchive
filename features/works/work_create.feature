@@ -13,6 +13,7 @@ Feature: Create Works
       And I am logged in as "newbie"
     When I go to the new work page
     Then I should see "Post New Work"
+      And I should see "Tags are comma separated, 100 characters per tag. Fandom, relationship, character, and additional tags must not add up to more than 75. Archive warning, category, and rating tags do not count toward this limit."
       And I select "Not Rated" from "Rating"
       And I check "No Archive Warnings Apply"
       And I select "English" from "Choose a language"
